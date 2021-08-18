@@ -203,7 +203,7 @@
                         <ul class="treeview-menu">
                             <li <?= $this->uri->segment(1) == 'category' ? 'class="active"' : ''; ?>><a href="<?= base_url('category'); ?>"><i class="fa fa-circle-o"></i> Categories</a></li>
                             <li <?= $this->uri->segment(1) == 'units' ? 'class="active"' : ''; ?>><a href="<?= base_url('units'); ?>"><i class="fa fa-circle-o"></i> Units</a></li>
-                            <li <?= $this->uri->segment(1) == 'items' ? 'class="active"' : ''; ?>><a href="../layout/fixed.html"><i class="fa fa-circle-o"></i> Items</a></li>
+                            <li <?= $this->uri->segment(1) == 'items' ? 'class="active"' : ''; ?>><a href="<?= base_url('items'); ?>"><i class="fa fa-circle-o"></i> Items</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
