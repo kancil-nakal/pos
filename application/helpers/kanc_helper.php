@@ -1,0 +1,36 @@
+<?php
+
+function is_logged_in()
+{
+    $ci = get_instance();
+    $user_session = $ci->session->userdata('username');
+    if (!$user_session) {
+        redirect('auth');
+    }
+}
+// function is_logged_in()
+// {
+//     $ci = &get_instance();
+//     $user_session = $ci->session->userdata('user_id');
+//     if ($user_session) {
+//         redirect('dashboard');
+//     }
+// }
+
+function is_not_logged_in()
+{
+    $ci = &get_instance();
+    $user_session = $ci->session->userdata('user_id');
+    if (!$user_session) {
+        redirect('auth');
+    }
+}
+
+function check_level()
+{
+    $ci = &get_instance();
+    $ci->load->library('fungsi');
+    if ($ci->fungsi->user_login()->level != 1) {
+        redirect('dashboard');
+    }
+}
