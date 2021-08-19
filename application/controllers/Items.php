@@ -164,4 +164,20 @@ class Items extends CI_Controller
         }
         redirect('items');
     }
+
+    public function barcode_qrcode($id)
+    {
+        $data = [
+            'title' => 'Items'
+        ];
+        $data['items'] = $this->item->getIdItem($id);
+        $this->template->load('templates/template', 'products/items/barcode_qrcode', $data);
+    }
+
+    public function barcode_print($id)
+    {
+        $data['items'] = $this->item->getIdItem($id);
+        $html = $this->load->view('products/items/barcode_print', $data, true);
+        $this->fungsi->PdfGenerator($html, 'barcode-' . $data['items']['barcode'], 'A4', 'Potraite');
+    }
 }

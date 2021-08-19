@@ -43,7 +43,9 @@
                         foreach ($items as $item) : ?>
                             <tr>
                                 <td><?= $i++; ?></td>
-                                <td><?= $item['barcode']; ?></td>
+                                <td><?= $item['barcode']; ?><br>
+                                    <a href="<?= base_url('items/barcode_qrcode/') . $item['item_id']; ?>" class="btn btn-default btn-xs"><i class="fa fa-barcode"></i> Generate</a>
+                                </td>
                                 <td>
                                     <?php if ($item['image'] != null) : ?>
                                         <img src="<?= base_url('uploads/product/') . $item['image']; ?>" style="width: 100px;">

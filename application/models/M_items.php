@@ -3,6 +3,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_items extends CI_Model
 {
+
+
+
     public function getAllItem()
     {
         $this->db->select('p_items.*, p_categories.name as category_name, p_units.name as unit_name');
