@@ -11,6 +11,40 @@ class Items extends CI_Controller
         $this->load->model('M_units', 'unit');
         $this->load->model('M_category', 'category');
     }
+
+
+    function get_ajax()
+    {
+        $items = $this->item->get_datatables();
+        $data = array();
+        $no = @$_POST['start'];
+        foreach ($items as $item) {
+            $no++;
+            $row = array();
+            $row[] = $no . ".";
+            $row[] = $item->barcode . '<br><a href="' . site_url('items/barcode_qrcode/' . $item->item_id) . '" class="btn btn-default btn-xs">Generate <i class="fa fa-barcode"></i></a>';
+            $row[] = $item->image != null ? '<img src="' . base_url('uploads/product/' . $item->image) . '" class="img" style="width:100px">' : null;
+            $row[] = $item->name;
+            $row[] = $item->category_name;
+            $row[] = $item->stock;
+            $row[] = $item->unit_name;
+            $row[] = "Rp. " . number_format($item->price) . ".00,-";
+            // add html for action
+            $row[] = '<a href="' . site_url('items/edit/' . $item->item_id) . '" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Update</a>
+                    <a href="' . site_url('items/del/' . $item->item_id) . '" onclick="return confirm(\'Yakin hapus data?\')"  class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Delete</a>';
+            $data[] = $row;
+        }
+        $output = array(
+            "draw" => @$_POST['draw'],
+            "recordsTotal" => $this->item->count_all(),
+            "recordsFiltered" => $this->item->count_filtered(),
+            "data" => $data,
+        );
+        // output to json format
+        echo json_encode($output);
+    }
+
+
     public function index()
     {
         $data = [
@@ -117,7 +151,7 @@ class Items extends CI_Controller
                 if (@$_FILES['image']['name'] != null) {
                     if ($this->upload->do_upload('image')) {
                         $item = $this->item->getIdItem($post['item_id']);
-                        if ($item['image']) {
+                        if ($item['image'] != null) {
                             $target_file = './uploads/product/' . $item['image'];
                             unlink($target_file);
                         }

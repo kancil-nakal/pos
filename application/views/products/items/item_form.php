@@ -73,7 +73,7 @@
                                     <img style="width:50%" src="<?= base_url('uploads/product/') . $items['image']; ?>" alt="">
                                 </div>
                             <?php endif ?>
-                            <input type="file" class="form-control" id="image" name="image" required>
+                            <input type="file" class="form-control" id="image" name="image">
                         </div>
                         <br>
                         <div class="form-group">

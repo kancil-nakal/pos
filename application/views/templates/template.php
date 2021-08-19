@@ -244,6 +244,9 @@
 
         <!-- =============================================== -->
 
+        <!-- jQuery 3 -->
+        <script src="<?= base_url('assets/vendor') ?>/bower_components/jquery/dist/jquery.min.js"></script>
+
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <?= $contents; ?>
@@ -262,8 +265,7 @@
     </div>
     <!-- ./wrapper -->
 
-    <!-- jQuery 3 -->
-    <script src="<?= base_url('assets/vendor') ?>/bower_components/jquery/dist/jquery.min.js"></script>
+
     <!-- Bootstrap 3.3.7 -->
     <script src="<?= base_url('assets/vendor') ?>/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- SlimScroll -->

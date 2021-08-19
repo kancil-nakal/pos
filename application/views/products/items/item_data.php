@@ -27,7 +27,7 @@
                 <table class="table table-striped table-bordered" id="example1">
                     <thead>
                         <tr>
-                            <th style="width: 50px">#</th>
+                            <th style="width: 10px">#</th>
                             <th>Barcode</th>
                             <th>Image</th>
                             <th>Name</th>
@@ -39,8 +39,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $i = 1;
-                        foreach ($items as $item) : ?>
+                        <!-- <?php $i = 1;
+                                foreach ($items as $item) : ?>
                             <tr>
                                 <td><?= $i++; ?></td>
                                 <td><?= $item['barcode']; ?><br>
@@ -61,7 +61,7 @@
                                     <a href="<?= base_url('items/delete/' . $item['item_id']); ?>" class="btn btn-xs btn-danger" onclick="return confirm('Apakah anda yakin?')"><i class="fa fa-trash"></i> Delete</a>
                                 </td>
                             </tr>
-                        <?php endforeach ?>
+                        <?php endforeach ?> -->
 
                     </tbody>
                 </table>
@@ -75,3 +75,30 @@
     <!-- ./box -->
 </section>
 <!-- ./section -->
+
+<script>
+    $(document).ready(function() {
+        $('#example1').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                "url": "<?= site_url('items/get_ajax') ?>",
+                "type": "POST"
+            },
+            "columnDefs": [{
+                    "targets": [7],
+                    "className": "text-right"
+                },
+                {
+                    "targets": [2, 5, 6, -1],
+                    "className": "text-center"
+                },
+                {
+                    "targets": [0, 7, -1],
+                    "orderable": false,
+                },
+            ],
+            "order": []
+        });
+    });
+</script>
