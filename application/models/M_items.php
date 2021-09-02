@@ -7,7 +7,7 @@ class M_items extends CI_Model
     // start datatables
     var $column_order = array(null, 'barcode', 'p_items.name', 'category_name', 'unit_name', 'price', 'stock'); //set column field database for datatable orderable
     var $column_search = array('barcode', 'p_items.name', 'price'); //set column field database for datatable searchable
-    var $order = array('item_id' => 'desc'); // default order 
+    var $order = array('item_id' => 'desc'); // default order
 
     private function _get_datatables_query()
     {
@@ -16,7 +16,7 @@ class M_items extends CI_Model
         $this->db->join('p_categories', 'p_items.category_id = p_categories.category_id');
         $this->db->join('p_units', 'p_items.unit_id = p_units.unit_id');
         $i = 0;
-        foreach ($this->column_search as $item) { // loop column 
+        foreach ($this->column_search as $item) { // loop column
             if (@$_POST['search']['value']) { // if datatable send POST for search
                 if ($i === 0) { // first loop
                     $this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
