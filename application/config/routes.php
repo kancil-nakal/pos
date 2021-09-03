@@ -58,3 +58,6 @@ $route['customers/add'] = 'pelanggan/add';
 $route['customers/process'] = 'pelanggan/process';
 $route['customers/edit/(:num)'] = 'pelanggan/edit/$1';
 $route['customers/delete/(:num)'] = 'pelanggan/delete/$1';
+
+$route['stock/in'] = 'stock/stock_in_data';
+$route['stock/in/add'] = 'stock/stock_in_add';

@@ -216,7 +216,7 @@
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i> Sales</a></li>
-                            <li><a href="../layout/boxed.html"><i class="fa fa-circle-o"></i> Stock in</a></li>
+                            <li><a href="<?= base_url('stock/in'); ?>"><i class="fa fa-circle-o"></i> Stock in</a></li>
                             <li><a href="../layout/fixed.html"><i class="fa fa-circle-o"></i> Stock out</a></li>
                         </ul>
                     </li>
@@ -279,6 +279,7 @@
     <script src="<?= base_url('assets/vendor') ?>/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="<?= base_url('assets/vendor') ?>/dist/js/demo.js"></script>
+
     <script>
         $(function() {
             $('#example1').DataTable()
@@ -292,6 +293,8 @@
             })
         })
     </script>
+
+
 
 </body>
 

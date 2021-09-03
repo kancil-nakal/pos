@@ -34,3 +34,9 @@ function check_level()
         redirect('dashboard');
     }
 }
+
+function indo_currency($nominal)
+{
+    $hasil = 'Rp. ' . number_format($nominal, 2, ',', '.');
+    return $hasil;
+}

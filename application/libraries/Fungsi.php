@@ -32,10 +32,4 @@ class Fungsi
         // Output the generated PDF to Browser
         $dompdf->stream($filename, ['Attachment' => 0]);
     }
-
-    function indo_currency($nominal)
-    {
-        $hasil = 'Rp. ' . number_format($nominal) . '.00,-';
-        return $hasil;
-    }
 }

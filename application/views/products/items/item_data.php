@@ -24,7 +24,7 @@
             <!-- /.box-header -->
             <div class="box-body table-responsive">
                 <?= $this->session->flashdata('success'); ?>
-                <table class="table table-striped table-bordered" id="example1">
+                <table class="table table-striped table-bordered" id="dataitem">
                     <thead>
                         <tr>
                             <th style="width: 10px">#</th>
@@ -78,7 +78,7 @@
 
 <script>
     $(document).ready(function() {
-        $('#example1').DataTable({
+        $('#dataitem').DataTable({
             "processing": true,
             "serverSide": true,
             "ajax": {
