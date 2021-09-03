@@ -7,7 +7,7 @@ class Stock extends CI_Controller
     {
         parent::__construct();
         is_logged_in();
-        $this->load->model(['M_items', 'M_supplier']);
+        $this->load->model(['M_items', 'M_supplier', 'M_stock']);
     }
 
     public function stock_in_data()
@@ -28,5 +28,21 @@ class Stock extends CI_Controller
         ];
         // $data['units'] = $this->unit->getAllUnit();
         $this->template->load('templates/template', 'transaction/stock_in/stock_in_form', $data);
+    }
+
+    public function process()
+    {
+        if (isset($_POST['submit'])) {
+            $post = $this->input->post(null, true);
+            $this->M_stock->add_stock_in($post);
+            $this->M_items->update_stock_in($post);
+
+            if ($this->db->affected_rows() > 0) {
+                $this->session->set_flashdata('message', '<div style="opacity: .6" class="alert alert-success" role="alert">
+            Selamat! Stock in berhasil dihapus!
+            </div>');
+                redirect('stock/in');
+            }
+        }
     }
 }

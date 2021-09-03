@@ -119,4 +119,12 @@ class M_items extends CI_Model
         $this->db->where('item_id', $id);
         $this->db->delete('p_items');
     }
+
+    public function update_stock_in($data)
+    {
+        $qty = $data['qty'];
+        $id = $data['item_id'];
+        $sql = "UPDATE p_items SET stock = stock + '$qty' WHERE item_id = '$id'";
+        $this->db->query($sql);
+    }
 }

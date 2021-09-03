@@ -66,7 +66,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="supplier">Supplier *</label>
-                                <select name="supplier" class="form-control" required>
+                                <select name="supplier" class="form-control">
                                     <option value="">-- Pilih --</option>
                                     <?php foreach ($suppliers as $supplier) : ?>
                                         <option value="<?= $supplier['supplier_id']; ?>"><?= $supplier['name']; ?></option>
@@ -80,7 +80,7 @@
 
 
                             <div class="form-group">
-                                <button class="btn btn-success" type="submit" name=""><i class="fa fa-paper-plane"></i> Save</button>
+                                <button class="btn btn-success" type="submit" name="submit"><i class="fa fa-paper-plane"></i> Save</button>
                                 <button class="btn btn-secondary" type="reset" name="reset">Reset</button>
                             </div>
                         </form>
