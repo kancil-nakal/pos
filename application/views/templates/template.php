@@ -206,7 +206,7 @@
                             <li <?= $this->uri->segment(1) == 'items' ? 'class="active"' : ''; ?>><a href="<?= base_url('items'); ?>"><i class="fa fa-circle-o"></i> Items</a></li>
                         </ul>
                     </li>
-                    <li class="treeview">
+                    <li class="treeview <?= $this->uri->segment(1) == 'stock'  ? 'active' : ''; ?>">
                         <a href="#">
                             <i class="fa fa-barcode"></i>
                             <span>Transaction</span>
@@ -215,8 +215,8 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i> Sales</a></li>
-                            <li><a href="<?= base_url('stock/in'); ?>"><i class="fa fa-circle-o"></i> Stock in</a></li>
+                            <li class=""><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i> Sales</a></li>
+                            <li class="<?= $this->uri->segment(1) == 'stock' && $this->uri->segment(2) == 'in'  ? 'active' : ''; ?>"><a href="<?= base_url('stock/in'); ?>"><i class="fa fa-circle-o"></i> Stock in</a></li>
                             <li><a href="../layout/fixed.html"><i class="fa fa-circle-o"></i> Stock out</a></li>
                         </ul>
                     </li>
