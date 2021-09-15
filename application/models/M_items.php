@@ -58,6 +58,15 @@ class M_items extends CI_Model
     }
     // end datatables
 
+    public function get($id = null){
+        $this->db->from('p_items');
+        if($id != null){
+            $this->db->where('item_id', $id);
+        }
+        $query = $this->db->get();
+        return $query;
+    }
+
     public function getAllItem()
     {
         $this->db->select('p_items.*, p_categories.name as category_name, p_units.name as unit_name');
@@ -125,6 +134,14 @@ class M_items extends CI_Model
         $qty = $data['qty'];
         $id = $data['item_id'];
         $sql = "UPDATE p_items SET stock = stock + '$qty' WHERE item_id = '$id'";
+        $this->db->query($sql);
+    }
+
+    public function update_stock_out($data)
+    {
+        $qty = $data['qty'];
+        $id = $data['item_id'];
+        $sql = "UPDATE p_items SET stock = stock - '$qty' WHERE item_id = '$id'";
         $this->db->query($sql);
     }
 }

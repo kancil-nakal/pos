@@ -3,6 +3,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_supplier extends CI_Model
 {
+
+    public function get($id = null){
+        $this->db->from('suppliers');
+        if($id != null){
+            $this->db->where('supplier_id', $id);
+        }
+        $query = $this->db->get();
+        return $query;
+    }
+
     public function getAllSupplier()
     {
         return $this->db->get('suppliers')->result_array();

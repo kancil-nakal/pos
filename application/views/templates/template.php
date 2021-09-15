@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini fixed skin-purple <?= $this->uri->segment(1) == 'sales' ? 'sidebar-collapse' : ''; ?>">
     <!-- Site wrapper -->
     <div class="wrapper">
 
@@ -206,7 +206,7 @@
                             <li <?= $this->uri->segment(1) == 'items' ? 'class="active"' : ''; ?>><a href="<?= base_url('items'); ?>"><i class="fa fa-circle-o"></i> Items</a></li>
                         </ul>
                     </li>
-                    <li class="treeview <?= $this->uri->segment(1) == 'stock'  ? 'active' : ''; ?>">
+                    <li class="treeview <?= $this->uri->segment(1) == 'stock' || $this->uri->segment(1) == 'sales'  ? 'active' : ''; ?>">
                         <a href="#">
                             <i class="fa fa-barcode"></i>
                             <span>Transaction</span>
@@ -215,9 +215,9 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li class=""><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i> Sales</a></li>
+                            <li class="<?= $this->uri->segment(1) == 'sales'  ? 'active' : ''; ?>"><a href="<?= base_url('stock/in'); ?>"><a href="<?= base_url('sales'); ?>"><i class="fa fa-circle-o"></i> Sales</a></li>
                             <li class="<?= $this->uri->segment(1) == 'stock' && $this->uri->segment(2) == 'in'  ? 'active' : ''; ?>"><a href="<?= base_url('stock/in'); ?>"><i class="fa fa-circle-o"></i> Stock in</a></li>
-                            <li><a href="../layout/fixed.html"><i class="fa fa-circle-o"></i> Stock out</a></li>
+                            <li class="<?= $this->uri->segment(1) == 'stock' && $this->uri->segment(2) == 'out'  ? 'active' : ''; ?>"><a href="<?= base_url('stock/out'); ?>"><i class="fa fa-circle-o"></i> Stock out</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
@@ -235,7 +235,7 @@
                     </li>
                     <?php if ($this->fungsi->user_login()->level == 1) : ?>
                         <li class="header">SETTING</li>
-                        <li <?= $this->uri->segment(1) == 'users' ? 'class="active"' : ''; ?>><a href="<?= base_url('users'); ?>"><i class="fa fa-user"></i> Users</li>
+                        <li <?= $this->uri->segment(1) == 'users' ? 'class="active"' : ''; ?>><a href="<?= base_url('users'); ?>"><i class="fa fa-user"></i> <span>Users</span></a></li>
                     <?php endif; ?>
                 </ul>
             </section>

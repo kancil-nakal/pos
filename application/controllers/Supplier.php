@@ -51,12 +51,12 @@ class Supplier extends CI_Controller
         $post = $this->input->post(null, TRUE);
         if (isset($_POST['tambah'])) {
             $this->supplier->addSupplier($post);
-            $this->session->set_flashdata('message', '<div style="opacity: .6" class="alert alert-success" role="alert">
+            $this->session->set_flashdata('message', '<div  class="alert alert-success" role="alert">
                 Selamat! Supplier berhasil ditambahkan!
                 </div>');
         } else if (isset($_POST['edit'])) {
             $this->supplier->editSupplier($post);
-            $this->session->set_flashdata('message', '<div style="opacity: .6" class="alert alert-success" role="alert">
+            $this->session->set_flashdata('message', '<div  class="alert alert-success" role="alert">
                 Selamat! Supplier berhasil diupdate!
                 </div>');
         }
@@ -67,9 +67,17 @@ class Supplier extends CI_Controller
     {
         $id = $this->input->post('supplier_id');
         $this->supplier->delSupplier($id);
-        $this->session->set_flashdata('message', '<div style="opacity: .6" class="alert alert-success" role="alert">
-            Selamat! Supplier berhasil dihapus!
-            </div>');
-        redirect('supplier');
+        $error = $this->db->error();
+        if($error['code'] != 0){
+            $this->session->set_flashdata('message', '<div  class="alert alert-danger" role="alert">
+                Gagal! Supplier tidak dapat dihapus!
+                </div>');
+            redirect('supplier');
+        } else {
+            $this->session->set_flashdata('message', '<div  class="alert alert-success" role="alert">
+                Selamat! Supplier berhasil dihapus!
+                </div>');
+            redirect('supplier');
+        }
     }
 }

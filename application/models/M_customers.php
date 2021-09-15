@@ -3,6 +3,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_customers extends CI_Model
 {
+    public function get($id = null){
+        $this->db->from('customers');
+        if($id != null){
+            $this->db->where('customer_id', $id);
+        }
+        $query = $this->db->get();
+        return $query;
+    }
+
     public function getAllCustomer()
     {
         return $this->db->get('customers')->result_array();
