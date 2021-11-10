@@ -32,4 +32,10 @@ class Fungsi
         // Output the generated PDF to Browser
         $dompdf->stream($filename, ['Attachment' => 0]);
     }
+
+    public function getMax($table = null, $field = null)
+    {
+        $this->db->select_max($field);
+        return $this->db->get($table)->row_array()[$field];
+    }
 }

@@ -36,7 +36,7 @@ class Stock extends CI_Controller
         $stock_id = $this->uri->segment(4);
         $item_id = $this->uri->segment(5);
         $qty = $this->M_stock->get($stock_id)->row()->qty;
-        $data = ['qty' => $qty,'item_id' => $item_id];
+        $data = ['qty' => $qty, 'item_id' => $item_id];
         $this->M_items->update_stock_out($data);
         $this->M_stock->del($stock_id);
         if ($this->db->affected_rows() > 0) {
@@ -45,7 +45,6 @@ class Stock extends CI_Controller
         </div>');
             redirect('stock/in');
         }
-
     }
 
     public function process()
@@ -90,7 +89,7 @@ class Stock extends CI_Controller
     {
         if (isset($_POST['submit'])) {
             $post = $this->input->post(null, true);
-            if($post['qty'] >= $post['stock'] ){
+            if ($post['qty'] >= $post['stock']) {
                 $this->session->set_flashdata('message', '<div  class="alert alert-danger" role="alert">
                 Gagal! Qty melebihi stock!
                 </div>');
@@ -113,7 +112,7 @@ class Stock extends CI_Controller
         $stock_id = $this->uri->segment(4);
         $item_id = $this->uri->segment(5);
         $qty = $this->M_stock->get($stock_id)->row()->qty;
-        $data = ['qty' => $qty,'item_id' => $item_id];
+        $data = ['qty' => $qty, 'item_id' => $item_id];
         $this->M_items->update_stock_in($data);
         $this->M_stock->del($stock_id);
         if ($this->db->affected_rows() > 0) {
@@ -122,6 +121,5 @@ class Stock extends CI_Controller
         </div>');
             redirect('stock/out');
         }
-
     }
 }

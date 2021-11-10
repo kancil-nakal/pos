@@ -36,7 +36,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <?php $i = 1;
+                        <?php $i = 1;
                         foreach ($row as $key => $data) : ?>
                             <tr>
                                 <td><?= $i++; ?></td>
@@ -45,14 +45,7 @@
                                 <td><?= $data->qty ?></td>
                                 <td><?= indo_date($data->date) ?></td>
                                 <td class="text-center float">
-                                    <a id="set_detail" class="btn btn-xs btn-info" data-toggle="modal" data-target="#modal-detail"
-                                        data-barcode="<?= $data->barcode; ?>" 
-                                        data-itemname="<?= $data->item_name; ?>" 
-                                        data-detail="<?= $data->detail; ?>" 
-                                        data-suppliername="<?= $data->supplier_name; ?>" 
-                                        data-qty="<?= $data->qty; ?>" 
-                                        data-date="<?= indo_date($data->date); ?>" 
-                                    ><i class="fa fa-eye"></i> Detail</a>
+                                    <a id="set_detail" class="btn btn-xs btn-info" data-toggle="modal" data-target="#modal-detail" data-barcode="<?= $data->barcode; ?>" data-itemname="<?= $data->item_name; ?>" data-detail="<?= $data->detail; ?>" data-suppliername="<?= $data->supplier_name; ?>" data-qty="<?= $data->qty; ?>" data-date="<?= indo_date($data->date); ?>"><i class="fa fa-eye"></i> Detail</a>
                                     <a href="<?= base_url('stock/in/delete/' . $data->stock_id . '/' . $data->item_id); ?>" class="btn btn-xs btn-danger" onclick="return confirm('Apakah anda yakin?')"><i class="fa fa-trash"></i> Delete</a>
                                 </td>
                             </tr>
@@ -119,8 +112,8 @@
             var itemname = $(this).data('itemname');
             var detail = $(this).data('detail');
             var suppliername = $(this).data('suppliername');
-            var qty = $(this).data('qty'); 
-            var date = $(this).data('date'); 
+            var qty = $(this).data('qty');
+            var date = $(this).data('date');
             $('#barcode').text(barcode);
             $('#item_name').text(itemname);
             $('#detail').text(detail);
@@ -130,4 +123,3 @@
         })
     })
 </script>
-
