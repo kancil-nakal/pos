@@ -129,6 +129,7 @@
                                         <?php endif ?>
                                         <br>
                                         <?= $this->fungsi->user_login()->name; ?>
+                                        <?= $this->fungsi->user_login()->user_id; ?>
                                         <small><?= $this->fungsi->user_login()->address ?></small>
                                     </p>
                                 </li>

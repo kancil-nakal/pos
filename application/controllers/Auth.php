@@ -27,14 +27,14 @@ class Auth extends CI_Controller
         $username = $this->input->post('username');
         $password = $this->input->post('password');
         $users = $this->db->get_where('users', ['username' => $username])->row_array();
-
         if ($users) {
             if ($users['is_active'] == 1) {
                 if (password_verify($password, $users['password'])) {
                     $data = [
                         'username' => $users['username'],
-                        'user_id' => $this->db->get_where('users', 'user_id'),
-                        'level' => $users['level']
+                        'user_id' => $users['user_id'],
+                        'level' => $users['level'],
+                        // 'userid' => $users['user_id']
                     ];
                     $this->session->set_userdata($data);
                     if ($users['level'] == 1) {

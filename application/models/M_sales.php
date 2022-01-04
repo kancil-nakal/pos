@@ -1,4 +1,7 @@
 <?php
+
+use FontLib\Table\Type\post;
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_sales extends CI_Model
@@ -17,14 +20,37 @@ class M_sales extends CI_Model
         return $invoice;
     }
 
-    //alam koding
-    // public function invoice_no($prefix = null, $table = null, $field = null)
-    // {
-    //     $this->db->select('invoice');
-    //     $this->db->like($field, $prefix, 'after');
-    //     $this->db->order_by($field, 'desc');
-    //     $this->db->limit(1);
+    public function get_cart($params = null)
+    {
+        $this->db->select('*, p_items.name as item_name, t_cart.price as cart_price');
+        $this->db->from('t_cart');
+        $this->db->join('p_items', 't_cart.item_id = p_items.item_id');
+        if ($params != null) {
+            $this->db->where($params);
+        }
+        $this->db->where('user_id', $this->session->userdata('user_id'));
+        $query = $this->db->get();
+        return $query;
+    }
 
-    //     return $this->db->get($table)->row_array()[$field];
-    // }
+    public function add_cart($post)
+    {
+        $query = $this->db->query("SELECT MAX(cart_id) AS cart_no FROM t_cart");
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            $cart_no = ((int) $row->cart_no) + 1;
+        } else {
+            $cart_no = "1";
+        }
+
+        $data = [
+            'cart_id' => $cart_no,
+            'item_id' => $post['item_id'],
+            'price' => $post['price'],
+            'qty' => $post['qty'],
+            'total' => $post['price'] * $post['qty'],
+            'user_id' => $this->session->userdata('user_id'),
+        ];
+        $this->db->insert('t_cart', $data);
+    }
 }

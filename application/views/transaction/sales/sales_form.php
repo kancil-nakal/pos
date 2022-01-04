@@ -85,7 +85,7 @@
                             </td>
                             <td>
                                 <div class="form-group">
-                                    <input type="number" id="qty" value="1" min="1" class="form-control">
+                                    <input type="number" name="qty" id="qty" value="1" min="1" class="form-control">
                                 </div>
                             </td>
                         </tr>
@@ -132,9 +132,7 @@
                             </tr>
                         </thead>
                         <tbody id="cart_table">
-                            <tr>
-                                <td colspan="9" class="text-center"> Tidak ada item</td>
-                            </tr>
+                            <?php $this->view('transaction/sales/cart_data') ?>
                         </tbody>
                     </table>
                 </div>
@@ -239,3 +237,98 @@
     </div>
 </section>
 <!-- End Content -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="modal-item">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-item">Select Product Item</h4>
+            </div>
+            <div class="modal-body table-responsive">
+                <table class="table table-bordered table-striped" id="example1">
+                    <thead>
+                        <tr>
+                            <th>Barcode</th>
+                            <th>Name</th>
+                            <th>Unit</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($items as $item) : ?>
+                            <tr>
+                                <td><?= $item['barcode']; ?></td>
+                                <td style="width: 200px;"><?= $item['name']; ?></td>
+                                <td><?= $item['unit_name']; ?></td>
+                                <td style="width: 100px;"><?= indo_currency($item['price']); ?></td>
+                                <td><?= $item['stock']; ?></td>
+                                <td>
+                                    <button class="btn btn-xs btn-info" id="select" data-id="<?= $item['item_id']; ?>" data-barcode="<?= $item['barcode']; ?>" data-price="<?= $item['price']; ?>" data-stock="<?= $item['stock']; ?>"><i class="fa fa-check"></i> Select</button>
+                                </td>
+                            </tr>
+                        <?php endforeach ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).on('click', '#select', function() {
+        $('#item_id').val($(this).data('id'));
+        $('#barcode').val($(this).data('barcode'));
+        $('#price').val($(this).data('price'));
+        $('#stock').val($(this).data('stock'));
+        $('#modal-item').modal('hide');
+    });
+
+    $(document).on('click', '#add_cart', function() {
+        var item_id = $('#item_id').val()
+        var price = $('#price').val()
+        var stock = $('#stock').val()
+        var qty = $('#qty').val()
+        // var url = '<?= site_url('sales/process') ?>'
+        if (item_id == '') {
+            alert('Product belum dipilih')
+            $('#barcode').focus()
+        } else if (stock < 1) {
+            alert('Stock tidak mencukupi')
+            $('#item_id').val('')
+            $('#barcode').val('')
+            $('#barcode').focus()
+        } else {
+            $('#item_id').val('')
+            $('#barcode').val('')
+            $('#barcode').focus()
+            $.ajax({
+                type: "post",
+                url: "<?= site_url('sales/process') ?>",
+                data: {
+                    'add_cart': true,
+                    'item_id': item_id,
+                    'price': price,
+                    'qty': qty,
+                },
+                dataType: 'json',
+                success: function(data) {
+                    if (data.success == true) {
+                        $('#cart_table').load('<?= site_url('sales/cart_data') ?>', function() {
+
+                        })
+                    } else {
+                        alert('Gagal tambah item cart')
+                    }
+                }
+            })
+        }
+    })
+</script>
