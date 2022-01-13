@@ -64,4 +64,17 @@ class Sales extends CI_Controller
 		$data['cart'] = $this->M_sales->get_cart()->result();
 		$this->load->view('transaction/sales/cart_data', $data);
 	}
+
+	public function cart_del()
+	{
+		$cart_id = $this->input->post('cart_id');
+		$this->M_sales->del_cart(['cart_id' => $cart_id]);
+
+		if ($this->db->affected_rows() > 0) {
+			$params = array("success" => true);
+		} else {
+			$params = array("success" => false);
+		}
+		echo json_encode($params);
+	}
 }

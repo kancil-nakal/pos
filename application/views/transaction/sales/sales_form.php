@@ -332,17 +332,26 @@
         }
     })
 
-    // $(document).on('click', '#del_cart', function() {
-    //     if (confirm('Apakah anda yakin?')) {
-    //         var cart_id = $(this).data('cartid')
-    //         $.ajax({
-    //             type: 'post',
-    //             url: '',
-    //             dataType: 'JSON',
-    //             data: {
-    //                 'cart_id': cart_id
-    //             }
-    //         })
-    //     }
-    // })
+    $(document).on('click', '#del_cart', function() {
+        if (confirm('Apakah anda yakin?')) {
+            var cart_id = $(this).data('cartid')
+            $.ajax({
+                type: 'post',
+                url: '<?= site_url('sales/cart_del') ?>',
+                dataType: 'JSON',
+                data: {
+                    'cart_id': cart_id
+                },
+                success: function(result) {
+                    if (result.success == true) {
+                        $('#cart_table').load('<?= site_url('sales/cart_data') ?>', function() {
+
+                        })
+                    } else {
+                        alert('Gagal hapus item cart')
+                    }
+                }
+            })
+        }
+    })
 </script>
