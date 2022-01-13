@@ -296,7 +296,6 @@
         var price = $('#price').val()
         var stock = $('#stock').val()
         var qty = $('#qty').val()
-        // var url = '<?= site_url('sales/process') ?>'
         if (item_id == '') {
             alert('Product belum dipilih')
             $('#barcode').focus()
@@ -306,9 +305,6 @@
             $('#barcode').val('')
             $('#barcode').focus()
         } else {
-            $('#item_id').val('')
-            $('#barcode').val('')
-            $('#barcode').focus()
             $.ajax({
                 type: "post",
                 url: "<?= site_url('sales/process') ?>",
@@ -324,6 +320,10 @@
                         $('#cart_table').load('<?= site_url('sales/cart_data') ?>', function() {
 
                         })
+                        $('#item_id').val('')
+                        $('#barcode').val('')
+                        $('#qty').val(1)
+                        $('#barcode').focus()
                     } else {
                         alert('Gagal tambah item cart')
                     }
@@ -331,4 +331,18 @@
             })
         }
     })
+
+    // $(document).on('click', '#del_cart', function() {
+    //     if (confirm('Apakah anda yakin?')) {
+    //         var cart_id = $(this).data('cartid')
+    //         $.ajax({
+    //             type: 'post',
+    //             url: '',
+    //             dataType: 'JSON',
+    //             data: {
+    //                 'cart_id': cart_id
+    //             }
+    //         })
+    //     }
+    // })
 </script>

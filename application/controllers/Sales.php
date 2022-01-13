@@ -42,7 +42,14 @@ class Sales extends CI_Controller
 		$post = $this->input->post(null, TRUE);
 
 		if (isset($_POST['add_cart'])) {
-			$this->M_sales->add_cart($post);
+
+			$item_id = $this->input->post('item_id');
+			$check_cart = $this->M_sales->get_cart(['t_cart.item_id' => $item_id]);
+			if ($check_cart->num_rows() > 0) {
+				$this->M_sales->update_cart_qty($post);
+			} else {
+				$this->M_sales->add_cart($post);
+			}
 			if ($this->db->affected_rows() > 0) {
 				$params = array("success" => true);
 			} else {
